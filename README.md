@@ -107,3 +107,14 @@ The app runs and is fully functional with none of these set — email sending an
 ## Author
 
 Tejas Krishna Datla — CS student, University of Maryland
+
+---
+
+## Git Hooks
+
+This repo uses a pre-commit hook (`gitleaks`) to block commits containing secrets. After cloning, install it once:
+
+```bash
+sudo apt install gitleaks   # or brew install gitleaks on macOS
+bash scripts/install-hooks.sh
+```

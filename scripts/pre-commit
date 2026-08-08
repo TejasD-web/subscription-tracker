@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Running gitleaks secret scan..."
+gitleaks protect --staged --verbose
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Commit blocked: gitleaks detected a potential secret in your staged changes."
+  echo "Review the output above, remove the secret, and try again."
+  exit 1
+fi
+echo "✅ No secrets detected."
