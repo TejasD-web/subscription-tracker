@@ -109,6 +109,11 @@ public class PlaidService {
         }
     }
 
+    /**
+     * On-demand detection: for every linked Plaid item, fetch recurring outflow
+     * streams and create subscriptions accordingly. Each stream is processed
+     * independently so one malformed/unusable stream doesn't block the rest.
+     */
     public CheckNowResponse checkBankNow() {
         int streamsFound = 0;
         int createdTrial = 0;
@@ -118,6 +123,7 @@ public class PlaidService {
         List<PlaidItem> items = plaidItemRepository.findAll();
 
         for (PlaidItem item : items) {
+            List<TransactionStream> outflows;
             try {
                 TransactionsRecurringGetRequest request =
                         new TransactionsRecurringGetRequest().accessToken(item.getAccessToken());
@@ -132,15 +138,32 @@ public class PlaidService {
                     continue;
                 }
 
-                List<TransactionStream> outflows = response.body().getOutflowStreams();
+                outflows = response.body().getOutflowStreams();
                 streamsFound += outflows.size();
+            } catch (Exception e) {
+                log.error("Error fetching recurring transactions for item {}: {}",
+                        item.getItemId(), e.getMessage(), e);
+                continue;
+            }
 
-                for (TransactionStream stream : outflows) {
+            for (TransactionStream stream : outflows) {
+                try {
                     String streamId = stream.getStreamId();
 
                     if (subscriptionRepository.findByPlaidStreamId(streamId).isPresent()) {
                         skipped++;
                         continue;
+                    }
+
+                    // Fall back through merchantName -> description -> a generic
+                    // placeholder, since @NotBlank on Subscription.name rejects
+                    // streams where Plaid didn't supply either field.
+                    String name = stream.getMerchantName();
+                    if (name == null || name.isBlank()) {
+                        name = stream.getDescription();
+                    }
+                    if (name == null || name.isBlank()) {
+                        name = "Unknown recurring charge";
                     }
 
                     BigDecimal amount = BigDecimal.valueOf(
@@ -150,8 +173,7 @@ public class PlaidService {
                     boolean isZeroCharge = amount.compareTo(BigDecimal.ZERO) == 0;
 
                     Subscription subscription = Subscription.builder()
-                            .name(stream.getMerchantName() != null
-                                    ? stream.getMerchantName() : stream.getDescription())
+                            .name(name)
                             .cost(amount)
                             .billingCycle(mapFrequency(stream.getFrequency()))
                             .category(Category.OTHER)
@@ -170,9 +192,10 @@ public class PlaidService {
                     } else {
                         createdPending++;
                     }
+                } catch (Exception e) {
+                    log.error("Skipping stream for item {} due to error: {}",
+                            item.getItemId(), e.getMessage(), e);
                 }
-            } catch (Exception e) {
-                log.error("Error checking bank item {}: {}", item.getItemId(), e.getMessage(), e);
             }
         }
 
