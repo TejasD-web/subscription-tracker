@@ -15,7 +15,7 @@ public class DailyScheduler {
 
     private final ReminderService reminderService;
 
-    @Scheduled(cron = "0 35 5 * * *")
+    @Scheduled(cron = "0 0 9 * * *")
     public void runDailyChecks() {
         log.info("Daily scheduler running at {}", LocalDateTime.now());
         reminderService.checkUpcomingRenewals();
