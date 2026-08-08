@@ -106,4 +106,4 @@ The app runs and is fully functional with none of these set — email sending an
 
 ## Author
 
-Tejas Krishna Datla — CS student, University of Maryland
+Tejas Datla — CS student, University of Maryland
