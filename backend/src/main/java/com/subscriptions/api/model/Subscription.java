@@ -23,6 +23,10 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** Plaid's stable recurring-stream identifier, used to prevent duplicate detection */
+    @Column(unique = true)
+    private String plaidStreamId;
+
     @NotBlank(message = "Name is required")
     @Column(nullable = false)
     private String name;

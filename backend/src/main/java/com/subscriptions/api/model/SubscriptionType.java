@@ -9,5 +9,8 @@ public enum SubscriptionType {
     TRIAL,
 
     /** Paying but undecided — will be prompted at period end */
-    TRYING_OUT
+    TRYING_OUT,
+
+    /** Detected via Plaid as a non-zero recurring charge, awaiting user confirmation */
+    PENDING_REVIEW
 }

@@ -1,0 +1,100 @@
+{
+  "netflix": {
+    "name": "Netflix",
+    "cost": 15.99,
+    "billingCycle": "MONTHLY",
+    "category": "STREAMING",
+    "cancellationUrl": "https://www.netflix.com/cancel"
+  },
+  "spotify": {
+    "name": "Spotify",
+    "cost": 11.99,
+    "billingCycle": "MONTHLY",
+    "category": "MUSIC",
+    "cancellationUrl": "https://www.spotify.com/account/subscription/cancel"
+  },
+  "hulu": {
+    "name": "Hulu",
+    "cost": 17.99,
+    "billingCycle": "MONTHLY",
+    "category": "STREAMING",
+    "cancellationUrl": "https://help.hulu.com/s/article/how-to-cancel"
+  },
+  "disney+": {
+    "name": "Disney+",
+    "cost": 13.99,
+    "billingCycle": "MONTHLY",
+    "category": "STREAMING",
+    "cancellationUrl": "https://www.disneyplus.com/account"
+  },
+  "youtube premium": {
+    "name": "YouTube Premium",
+    "cost": 13.99,
+    "billingCycle": "MONTHLY",
+    "category": "STREAMING",
+    "cancellationUrl": "https://www.youtube.com/paid_memberships"
+  },
+  "apple music": {
+    "name": "Apple Music",
+    "cost": 10.99,
+    "billingCycle": "MONTHLY",
+    "category": "MUSIC",
+    "cancellationUrl": "https://support.apple.com/en-us/HT202039"
+  },
+  "amazon prime": {
+    "name": "Amazon Prime",
+    "cost": 14.99,
+    "billingCycle": "MONTHLY",
+    "category": "STREAMING",
+    "cancellationUrl": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G8LFMVXHRGV93C2T"
+  },
+  "github": {
+    "name": "GitHub Pro",
+    "cost": 4.00,
+    "billingCycle": "MONTHLY",
+    "category": "SOFTWARE",
+    "cancellationUrl": "https://github.com/settings/billing"
+  },
+  "notion": {
+    "name": "Notion",
+    "cost": 10.00,
+    "billingCycle": "MONTHLY",
+    "category": "SOFTWARE",
+    "cancellationUrl": "https://www.notion.so/my-account"
+  },
+  "xbox game pass": {
+    "name": "Xbox Game Pass",
+    "cost": 14.99,
+    "billingCycle": "MONTHLY",
+    "category": "GAMING",
+    "cancellationUrl": "https://account.microsoft.com/services"
+  },
+  "playstation plus": {
+    "name": "PlayStation Plus",
+    "cost": 79.99,
+    "billingCycle": "YEARLY",
+    "category": "GAMING",
+    "cancellationUrl": "https://www.playstation.com/en-us/support/subscriptions"
+  },
+  "icloud+": {
+    "name": "iCloud+",
+    "cost": 2.99,
+    "billingCycle": "MONTHLY",
+    "category": "CLOUD_STORAGE",
+    "cancellationUrl": "https://support.apple.com/en-us/HT207799"
+  },
+  "google one": {
+    "name": "Google One",
+    "cost": 2.99,
+    "billingCycle": "MONTHLY",
+    "category": "CLOUD_STORAGE",
+    "cancellationUrl": "https://one.google.com/storage"
+  },
+  "nyt": {
+    "name": "New York Times",
+    "cost": 17.00,
+    "billingCycle": "MONTHLY",
+    "category": "NEWS",
+    "cancellationUrl": "https://help.nytimes.com/hc/en-us/articles/360003499613"
+  }
+}
